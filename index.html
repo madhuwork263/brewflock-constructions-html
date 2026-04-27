@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brewflock Constructions</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <style>
         /* Custom animation for the hero image */
@@ -24,6 +25,22 @@
         .animate-pulse-slow {
             animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hide::-webkit-scrollbar,
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .scrollbar-hide,
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+     
     </style>
 </head>
 
@@ -3494,6 +3511,30 @@
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+     // ==========================================
+        // 0. LENIS FLUID SCROLL SETUP
+        // ==========================================
+        const lenis = new Lenis({
+            lerp: 0.08, // This controls the fluidity. Lower numbers (0.05) are smoother/heavier, higher (0.15) are snappier.
+            smoothWheel: true, // Enable smooth scrolling for mouse wheels
+            wheelMultiplier: 1, // How fast the wheel scrolls
+            smoothTouch: false, // Keep native scroll on mobile devices
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // This makes sure clicking your anchor links (like "About" or "Services") still scrolls smoothly using Lenis
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                lenis.scrollTo(this.getAttribute('href'));
+            });
+        });
 
         // ==========================================
         // 1. HEADER & MOBILE MENU LOGIC
