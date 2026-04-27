@@ -28,7 +28,7 @@
 </head>
 
 <body class="bg-slate-900">
-
+    <!-- Header Section -->
     <header id="main-header"
         class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b bg-transparent border-transparent py-5">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
@@ -140,6 +140,7 @@
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section
         class="relative min-h-[100vh] flex items-center justify-center lg:justify-start text-white overflow-hidden">
 
@@ -147,28 +148,33 @@
             <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
                 alt="Modern Luxury Construction"
                 class="w-full h-full object-cover object-center scale-105 animate-pulse-slow" />
-            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/20"></div>
+
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/80 to-slate-900/40 lg:bg-gradient-to-r lg:from-slate-900/95 lg:via-slate-900/80 lg:to-slate-900/20">
+            </div>
         </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full mt-16 md:mt-0">
-            <div class="max-w-3xl">
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full mt-20 md:mt-0 text-center lg:text-left">
+
+            <div class="max-w-3xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
 
                 <h1
-                    class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 leading-[1.05]">
-                    Building Your <br />
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#ea580c] to-amber-400">
-                        Future Legacy.
+                    class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 md:mt-16 md:mb-10 leading-[1.2] md:leading-[1.1]">
+                    Designing Vaastu-Compliant <br class="hidden md:block" />
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-[#ea580c] to-amber-400 inline-block mt-2 md:mt-0">
+                        Homes for Prosperity and Peace.
                     </span>
                 </h1>
 
-                <p class="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed font-light">
-                    Uncompromising quality and precision for residential and commercial projects. We don't just build
-                    structures; we craft environments that inspire.
+                <p class="text-base sm:text-lg text-slate-300 mb-8 md:mb-10 max-w-2xl leading-relaxed font-light">
+                    We combine modern construction expertise with proven Vaastu principles to create homes that are
+                    structurally strong and energetically balanced.
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-4">
+                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center lg:justify-start">
                     <a href="#contact"
-                        class="inline-flex items-center justify-center gap-2 bg-[#ea580c] text-white font-bold py-4 px-8 rounded-xl hover:bg-[#c2410c] hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-orange-900/40 active:scale-95">
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#ea580c] text-white font-bold py-3.5 px-6 md:py-4 md:px-8 rounded-xl hover:bg-[#c2410c] hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-orange-900/40 active:scale-95">
                         Get a Free Quote
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -179,7 +185,7 @@
                     </a>
 
                     <a href="#projects"
-                        class="inline-flex items-center justify-center gap-2 bg-transparent border border-slate-500/50 text-white font-bold py-4 px-8 rounded-xl hover:bg-slate-800/60 hover:border-slate-400 transition-all duration-300 backdrop-blur-sm active:scale-95">
+                        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-transparent border border-slate-500/50 text-white font-bold py-3.5 px-6 md:py-4 md:px-8 rounded-xl hover:bg-slate-800/60 hover:border-slate-400 transition-all duration-300 backdrop-blur-sm active:scale-95">
                         View Our Portfolio
                     </a>
                 </div>
@@ -188,6 +194,8 @@
         </div>
 
     </section>
+
+    <!-- About Section -->
     <section class="py-24 bg-white overflow-hidden" id="about">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
@@ -330,6 +338,8 @@
 
         </div>
     </section>
+
+    <!-- Services Section -->
     <section id="services" class="py-20 md:py-28 bg-white overflow-hidden">
 
         <style>
@@ -627,6 +637,8 @@
             </div>
         </div>
     </section>
+
+    <!-- Architectural Services Section -->
     <section id="architectural-services" class="py-16 md:py-20 bg-slate-50 overflow-hidden">
 
         <style>
@@ -1281,6 +1293,8 @@
             </div>
         </div>
     </section>
+
+    <!-- Interior Design Section -->
     <section id="interior-design" class="py-20 md:py-28 bg-white overflow-hidden">
 
         <style>
@@ -1458,6 +1472,203 @@
             </div>
         </div>
     </section>
+
+    <!-- Vaastu Section -->
+    <section id="vaastu" class="py-20 md:py-28 bg-slate-50 overflow-hidden">
+
+        <style>
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        </style>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center max-w-3xl mx-auto mb-12 md:mb-20">
+                <span class="text-[#ea580c] font-semibold uppercase tracking-widest text-sm block mb-4">
+                    Ancient Wisdom
+                </span>
+                <h2
+                    class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
+                    Vaastu-Compliant Home Design
+                </h2>
+                <p class="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                    We design and construct homes aligned with traditional Vaastu principles
+                    to ensure harmony, prosperity, and positive energy in every space.
+                </p>
+            </div>
+
+            <div
+                class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory scroll-smooth pb-10 md:pb-0 hide-scrollbar -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 after:content-[''] after:w-px after:shrink-0 md:after:hidden">
+
+                <div
+                    class="w-[85vw] sm:w-[350px] md:w-auto shrink-0 snap-center flex flex-col group relative bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden cursor-pointer">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    </div>
+                    <div class="relative z-10 flex-grow">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-[#ea580c] group-hover:bg-[#ea580c] group-hover:text-white transition-colors duration-500 mb-6 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-6 h-6">
+                                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
+                                <line x1="9" y1="3" x2="9" y2="18"></line>
+                                <line x1="15" y1="6" x2="15" y2="21"></line>
+                            </svg>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-slate-800 leading-snug mb-3 group-hover:text-[#ea580c] transition-colors duration-300">
+                            Plot Analysis</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">Detailed evaluation of plot orientation, road
+                            alignment, slopes, and surrounding elements to ensure optimal energy flow.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="w-[85vw] sm:w-[350px] md:w-auto shrink-0 snap-center flex flex-col group relative bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden cursor-pointer">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    </div>
+                    <div class="relative z-10 flex-grow">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-[#ea580c] group-hover:bg-[#ea580c] group-hover:text-white transition-colors duration-500 mb-6 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-6 h-6">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="3" y1="9" x2="21" y2="9"></line>
+                                <line x1="9" y1="21" x2="9" y2="9"></line>
+                            </svg>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-slate-800 leading-snug mb-3 group-hover:text-[#ea580c] transition-colors duration-300">
+                            Room Placement</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">Scientific placement of kitchen, bedrooms,
+                            pooja room, and living areas based on directional energy balance.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="w-[85vw] sm:w-[350px] md:w-auto shrink-0 snap-center flex flex-col group relative bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden cursor-pointer">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    </div>
+                    <div class="relative z-10 flex-grow">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-[#ea580c] group-hover:bg-[#ea580c] group-hover:text-white transition-colors duration-500 mb-6 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-6 h-6">
+                                <path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"></path>
+                                <path d="M2 20h20"></path>
+                                <path d="M14 12v.01"></path>
+                            </svg>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-slate-800 leading-snug mb-3 group-hover:text-[#ea580c] transition-colors duration-300">
+                            Entrance Alignment</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">Main door positioning based on auspicious
+                            directions to attract prosperity, health, and overall well-being.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="w-[85vw] sm:w-[350px] md:w-auto shrink-0 snap-center flex flex-col group relative bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden cursor-pointer">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    </div>
+                    <div class="relative z-10 flex-grow">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-[#ea580c] group-hover:bg-[#ea580c] group-hover:text-white transition-colors duration-500 mb-6 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-6 h-6">
+                                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                            </svg>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-slate-800 leading-snug mb-3 group-hover:text-[#ea580c] transition-colors duration-300">
+                            Water & Septic</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">Borewell, sump, overhead tank, and drainage
+                            placements aligned strictly with foundational Vaastu guidelines.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="w-[85vw] sm:w-[350px] md:w-auto shrink-0 snap-center flex flex-col group relative bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden cursor-pointer">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    </div>
+                    <div class="relative z-10 flex-grow">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-[#ea580c] group-hover:bg-[#ea580c] group-hover:text-white transition-colors duration-500 mb-6 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-6 h-6">
+                                <path d="M14 14.76V3.5a1.5 1.5 0 0 1 3 0v11.26l-3 .01Z"></path>
+                                <path d="M14 14.76v5.74a1.5 1.5 0 0 1-3 0v-5.74"></path>
+                                <path d="M11 14.76H2.5a1.5 1.5 0 0 1 0-3h8.5"></path>
+                                <path d="M11 14.76h9.5a1.5 1.5 0 0 1 0 3h-9.5"></path>
+                            </svg>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-slate-800 leading-snug mb-3 group-hover:text-[#ea580c] transition-colors duration-300">
+                            Staircase & Levels</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">Correct placement and directional flow of
+                            staircases, balancing floor elevations for structural and energetic harmony.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="w-[85vw] sm:w-[350px] md:w-auto shrink-0 snap-center flex flex-col group relative bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden cursor-pointer">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-50 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    </div>
+                    <div class="relative z-10 flex-grow">
+                        <div
+                            class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-[#ea580c] group-hover:bg-[#ea580c] group-hover:text-white transition-colors duration-500 mb-6 shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-6 h-6">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-slate-800 leading-snug mb-3 group-hover:text-[#ea580c] transition-colors duration-300">
+                            Custom Consultation</h3>
+                        <p class="text-slate-600 leading-relaxed text-sm">Personalized Vaastu planning for your plot and
+                            requirements, seamlessly integrated with modern architectural design.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-12 md:mt-16">
+                <a href="#contact"
+                    class="inline-flex items-center justify-center gap-2 bg-[#ea580c] hover:bg-[#c2410c] text-white font-bold px-8 py-4 rounded-xl transition-all duration-300 shadow-lg shadow-orange-900/20 active:scale-95">
+                    Get Vaastu Consultation
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="w-5 h-5">
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Planning & Execution Section -->
     <section id="planning-execution" class="py-20 md:py-28 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -1612,6 +1823,8 @@
             </div>
         </div>
     </section>
+
+    <!-- Design & Visualization Section -->
     <section id="design-visualization" class="py-14 md:py-20 bg-slate-50 overflow-hidden">
 
         <style>
@@ -1973,6 +2186,8 @@
         </div>
 
     </section>
+
+    <!-- Projects Section -->
     <section id="projects" class="py-20 md:py-28 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -2200,6 +2415,8 @@
 
         </div>
     </section>
+
+    <!-- Why Choose Us Section -->
     <section class="py-20 md:py-28 bg-slate-50 overflow-hidden">
 
         <style>
@@ -2419,6 +2636,8 @@
 
         </div>
     </section>
+
+    <!-- Process Section -->
     <section class="py-24 bg-slate-50 relative overflow-hidden" id="process">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
@@ -2614,6 +2833,8 @@
 
 
     </section>
+
+    <!-- Testimonials Section -->
     <section id="testimonials" class="py-20 md:py-28 bg-white relative overflow-hidden">
 
         <style>
@@ -2850,6 +3071,8 @@
             </div>
         </div>
     </section>
+
+    <!-- Contact Section -->
     <section id="contact" class="py-16 relative bg-[#0B1120] text-white overflow-hidden">
 
         <div
@@ -3062,6 +3285,8 @@
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
     <footer class="bg-[#0B1120] text-slate-300 border-t border-slate-800 relative overflow-hidden">
 
         <div
@@ -3266,11 +3491,13 @@
         </div>
     </footer>
 
-
-
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+        // ==========================================
+        // 1. HEADER & MOBILE MENU LOGIC
+        // ==========================================
         const header = document.getElementById('main-header');
         const menuBtn = document.getElementById('menu-toggle-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -3281,49 +3508,51 @@
         let isScrolled = false;
         let isMenuOpen = false;
 
-        const updateHeaderStyles = () => {
-            if (isScrolled || isMenuOpen) {
-                header.classList.remove('bg-transparent', 'border-transparent', 'py-5');
-                header.classList.add('bg-slate-900/90', 'backdrop-blur-md', 'border-slate-700/50', 'shadow-lg', 'py-3');
-            } else {
-                header.classList.add('bg-transparent', 'border-transparent', 'py-5');
-                header.classList.remove('bg-slate-900/90', 'backdrop-blur-md', 'border-slate-700/50', 'shadow-lg', 'py-3');
-            }
-        };
+        if (header) {
+            const updateHeaderStyles = () => {
+                if (isScrolled || isMenuOpen) {
+                    header.classList.remove('bg-transparent', 'border-transparent', 'py-5');
+                    header.classList.add('bg-slate-900/90', 'backdrop-blur-md', 'border-slate-700/50', 'shadow-lg', 'py-3');
+                } else {
+                    header.classList.add('bg-transparent', 'border-transparent', 'py-5');
+                    header.classList.remove('bg-slate-900/90', 'backdrop-blur-md', 'border-slate-700/50', 'shadow-lg', 'py-3');
+                }
+            };
 
-        window.addEventListener('scroll', () => {
-            isScrolled = window.scrollY > 50;
-            updateHeaderStyles();
-        });
-
-        const toggleMenu = () => {
-            isMenuOpen = !isMenuOpen;
-            updateHeaderStyles();
-
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('opacity-0', 'scale-y-0', 'pointer-events-none');
-                mobileMenu.classList.add('opacity-100', 'scale-y-100');
-                iconMenu.classList.add('hidden');
-                iconX.classList.remove('hidden');
-            } else {
-                mobileMenu.classList.add('opacity-0', 'scale-y-0', 'pointer-events-none');
-                mobileMenu.classList.remove('opacity-100', 'scale-y-100');
-                iconMenu.classList.remove('hidden');
-                iconX.classList.add('hidden');
-            }
-        };
-
-        if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (isMenuOpen) toggleMenu();
+            window.addEventListener('scroll', () => {
+                isScrolled = window.scrollY > 50;
+                updateHeaderStyles();
             });
-        });
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
+
+            const toggleMenu = () => {
+                isMenuOpen = !isMenuOpen;
+                updateHeaderStyles();
+
+                if (isMenuOpen) {
+                    mobileMenu.classList.remove('opacity-0', 'scale-y-0', 'pointer-events-none');
+                    mobileMenu.classList.add('opacity-100', 'scale-y-100');
+                    iconMenu.classList.add('hidden');
+                    iconX.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('opacity-0', 'scale-y-0', 'pointer-events-none');
+                    mobileMenu.classList.remove('opacity-100', 'scale-y-100');
+                    iconMenu.classList.remove('hidden');
+                    iconX.classList.add('hidden');
+                }
+            };
+
+            if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) toggleMenu();
+                });
+            });
+        }
+
+        // ==========================================
+        // 2. PROCESS SECTION ANIMATION LOGIC
+        // ==========================================
         const stepsData = [
             {
                 id: 1,
@@ -3373,70 +3602,73 @@
         const contentTitle = document.getElementById('content-title');
         const contentDescription = document.getElementById('content-description');
 
-        function updateUI() {
-            // 1. Update Progress Bar
-            progressLine.style.width = ((activeStep - 1) / (stepsData.length - 1)) * 100 + '%';
+        // Only run this logic if the process section exists on the page
+        if (progressLine && contentBox) {
+            function updateUI() {
+                // Update Progress Bar
+                progressLine.style.width = ((activeStep - 1) / (stepsData.length - 1)) * 100 + '%';
 
-            // 2. Update Node Styles
+                // Update Node Styles
+                nodes.forEach(node => {
+                    const stepId = parseInt(node.getAttribute('data-step'));
+                    const circle = node.querySelector('.step-circle');
+                    const number = node.querySelector('.step-number');
+                    const check = node.querySelector('.step-check');
+                    const label = node.querySelector('.step-label');
+
+                    const isActive = stepId === activeStep;
+                    const isPassed = stepId < activeStep;
+
+                    // Reset baseline classes
+                    circle.className = 'step-circle w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300 border-4 shadow-sm';
+                    label.className = 'step-label mt-4 text-sm font-semibold text-center transition-colors duration-300';
+
+                    if (isActive) {
+                        circle.classList.add('bg-[#ea580c]', 'border-orange-200', 'text-white', 'scale-110', 'shadow-orange-500/30');
+                        label.classList.add('text-[#ea580c]');
+                        number.classList.remove('hidden');
+                        check.classList.add('hidden');
+                    } else if (isPassed) {
+                        circle.classList.add('bg-orange-100', 'border-orange-200', 'text-[#ea580c]');
+                        label.classList.add('text-slate-500', 'group-hover:text-slate-700');
+                        number.classList.add('hidden');
+                        check.classList.remove('hidden');
+                    } else {
+                        circle.classList.add('bg-white', 'border-slate-200', 'text-slate-400', 'group-hover:border-slate-300');
+                        label.classList.add('text-slate-500', 'group-hover:text-slate-700');
+                        number.classList.remove('hidden');
+                        check.classList.add('hidden');
+                    }
+                });
+
+                // Update Content with Fade Animation
+                contentBox.classList.remove('opacity-100', 'translate-y-0');
+                contentBox.classList.add('opacity-0', 'translate-y-4');
+
+                setTimeout(() => {
+                    const currentData = stepsData[activeStep - 1];
+                    contentImage.src = currentData.image;
+                    contentImage.alt = currentData.title;
+                    contentStepNumber.textContent = `Step 0${currentData.id}`;
+                    contentTitle.textContent = currentData.title;
+                    contentDescription.textContent = currentData.description;
+
+                    contentBox.classList.remove('opacity-0', 'translate-y-4');
+                    contentBox.classList.add('opacity-100', 'translate-y-0');
+                }, 300); // Matches the CSS transition duration
+            }
+
+            // Attach click events
             nodes.forEach(node => {
-                const stepId = parseInt(node.getAttribute('data-step'));
-                const circle = node.querySelector('.step-circle');
-                const number = node.querySelector('.step-number');
-                const check = node.querySelector('.step-check');
-                const label = node.querySelector('.step-label');
-
-                const isActive = stepId === activeStep;
-                const isPassed = stepId < activeStep;
-
-                // Reset baseline classes
-                circle.className = 'step-circle w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300 border-4 shadow-sm';
-                label.className = 'step-label mt-4 text-sm font-semibold text-center transition-colors duration-300';
-
-                if (isActive) {
-                    circle.classList.add('bg-[#ea580c]', 'border-orange-200', 'text-white', 'scale-110', 'shadow-orange-500/30');
-                    label.classList.add('text-[#ea580c]');
-                    number.classList.remove('hidden');
-                    check.classList.add('hidden');
-                } else if (isPassed) {
-                    circle.classList.add('bg-orange-100', 'border-orange-200', 'text-[#ea580c]');
-                    label.classList.add('text-slate-500', 'group-hover:text-slate-700');
-                    number.classList.add('hidden');
-                    check.classList.remove('hidden');
-                } else {
-                    circle.classList.add('bg-white', 'border-slate-200', 'text-slate-400', 'group-hover:border-slate-300');
-                    label.classList.add('text-slate-500', 'group-hover:text-slate-700');
-                    number.classList.remove('hidden');
-                    check.classList.add('hidden');
-                }
+                node.addEventListener('click', () => {
+                    const clickedStep = parseInt(node.getAttribute('data-step'));
+                    if (clickedStep !== activeStep) {
+                        activeStep = clickedStep;
+                        updateUI();
+                    }
+                });
             });
-
-            // 3. Update Content with Fade Animation
-            contentBox.classList.remove('opacity-100', 'translate-y-0');
-            contentBox.classList.add('opacity-0', 'translate-y-4');
-
-            setTimeout(() => {
-                const currentData = stepsData[activeStep - 1];
-                contentImage.src = currentData.image;
-                contentImage.alt = currentData.title;
-                contentStepNumber.textContent = `Step 0${currentData.id}`;
-                contentTitle.textContent = currentData.title;
-                contentDescription.textContent = currentData.description;
-
-                contentBox.classList.remove('opacity-0', 'translate-y-4');
-                contentBox.classList.add('opacity-100', 'translate-y-0');
-            }, 300); // Matches the CSS transition duration
         }
-
-        // Attach click events
-        nodes.forEach(node => {
-            node.addEventListener('click', () => {
-                const clickedStep = parseInt(node.getAttribute('data-step'));
-                if (clickedStep !== activeStep) {
-                    activeStep = clickedStep;
-                    updateUI();
-                }
-            });
-        });
     });
 </script>
 
