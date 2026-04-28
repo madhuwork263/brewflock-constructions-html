@@ -9,6 +9,8 @@
     <link rel="icon" type="image/jpeg" href="favicon.jpeg">
     <link rel="apple-touch-icon" href="favicon.jpeg">
 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
@@ -916,6 +918,78 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gray-50 min-h-screen p-4 lg:p-8 flex items-center justify-center">
+
+        <div class="max-w-[1280px] w-full mx-auto bg-white p-6 sm:p-10 rounded-2xl shadow-sm">
+
+            <h2 id="page-title"
+                class="text-2xl sm:text-3xl font-semibold text-gray-900 mb-6 transition-all duration-300">
+                Construction Packages in Bengaluru
+            </h2>
+
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mb-8">
+
+                <div class="relative w-[150px]">
+                    <select id="city-selector"
+                        class="appearance-none w-full bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium px-4 py-2 pr-8 rounded-md transition-colors cursor-pointer outline-none focus:ring-2 focus:ring-[#ea580c]">
+                        <option value="bengaluru">Bengaluru</option>
+                        <option value="mysuru">Mysuru</option>
+                        <option value="hassan">Hassan</option>
+                        <option value="pune">Pune</option>
+                    </select>
+                    <svg class="w-4 h-4 text-gray-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
+                    <span class="text-sm font-medium text-gray-700">Type:</span>
+
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-6">
+                        <label class="flex items-center cursor-pointer group">
+                            <input type="radio" name="package_type" value="homes" class="hidden peer" checked>
+                            <div
+                                class="w-[18px] h-[18px] rounded-full border-2 border-gray-300 mr-2 flex items-center justify-center peer-checked:border-[#ea580c]">
+                                <div class="w-2.5 h-2.5 bg-[#ea580c] rounded-full hidden peer-checked:block"></div>
+                            </div>
+                            <span
+                                class="text-sm font-medium text-gray-600 peer-checked:text-gray-900 transition-colors">Homes</span>
+                            <span id="homes-starting-price"
+                                class="text-[10px] text-gray-400 font-bold ml-2 tracking-wide uppercase mt-[2px]">Starts
+                                at
+                                ₹1940 per sqft</span>
+                        </label>
+
+                        <label class="flex items-center cursor-pointer group">
+                            <input type="radio" name="package_type" value="luxury" class="hidden peer">
+                            <div
+                                class="w-[18px] h-[18px] rounded-full border-2 border-gray-300 mr-2 flex items-center justify-center peer-checked:border-[#ea580c]">
+                                <div class="w-2.5 h-2.5 bg-[#ea580c] rounded-full hidden peer-checked:block"></div>
+                            </div>
+                            <span
+                                class="text-sm font-medium text-gray-600 peer-checked:text-gray-900 transition-colors">Luxury
+                                Homes</span>
+                            <span id="luxury-starting-price"
+                                class="text-[10px] text-gray-400 font-bold ml-2 tracking-wide uppercase mt-[2px]">Starts
+                                at
+                                ₹3990 per sqft</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="packages-container"
+                class="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-4 sm:pb-0">
+            </div>
+
+            <div class="text-center mt-10 text-sm text-gray-600">
+                For a complete list of available offerings, <a href="#"
+                    class="text-[#ea580c] font-medium hover:underline">Compare Packages</a>
             </div>
         </div>
     </section>
@@ -3788,26 +3862,150 @@
     </footer>
 
 </body>
+<script src="data.js"></script>
+
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- DOM Elements ---
         const modal = document.getElementById("cityModalOverlay");
-        const radioButtons = document.querySelectorAll('input[name="location"]');
+        const modalRadios = document.querySelectorAll('input[name="location"]');
 
-        // 1. Show the modal when the page loads
-        modal.style.display = "flex";
+        const container = document.getElementById('packages-container');
+        const citySelector = document.getElementById('city-selector');
+        const packageRadios = document.querySelectorAll('input[name="package_type"]');
+        const pageTitle = document.getElementById('page-title');
 
-        // 2. Add an event listener to each city option
-        radioButtons.forEach(radio => {
+        const homesStartPrice = document.getElementById('homes-starting-price');
+        const luxuryStartPrice = document.getElementById('luxury-starting-price');
+
+        // --- 1. Local Storage Initialization ---
+        // Check if the user has visited before and saved a city
+        const savedCity = localStorage.getItem('selectedCity');
+
+        if (savedCity) {
+            // Set the dropdown to the saved city
+            citySelector.value = savedCity;
+
+            // Optionally: keep modal hidden if they already selected a city previously
+            // If you always want the modal to show on refresh, remove these next two lines
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
+
+            // Sync the modal's radio buttons to match the saved city
+            const activeModalRadio = document.getElementById(savedCity);
+            if (activeModalRadio) activeModalRadio.checked = true;
+        } else {
+            // Show modal if no city is stored in local storage
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        }
+
+        // --- 2. Main Rendering Function ---
+        function updateUI() {
+            const selectedCityKey = citySelector.value;
+            const selectedType = document.querySelector('input[name="package_type"]:checked').value;
+
+            // Fetch data from data.js
+            const cityData = locationData[selectedCityKey];
+            const packages = cityData[selectedType];
+
+            // Update text details
+            pageTitle.textContent = `Construction Packages in ${cityData.name}`;
+            homesStartPrice.textContent = `Starts at ₹${cityData.homes[0].price} per sqft`;
+            luxuryStartPrice.textContent = `Starts at ₹${cityData.luxury[0].price} per sqft`;
+
+            // Layout formatting for Luxury (3 items) vs Homes (4 items)
+            if (selectedType === 'luxury') {
+                container.classList.remove('xl:grid-cols-4');
+                container.classList.add('xl:grid-cols-3', 'xl:w-3/4', 'mx-auto');
+            } else {
+                container.classList.remove('xl:grid-cols-3', 'xl:w-3/4', 'mx-auto');
+                container.classList.add('xl:grid-cols-4');
+            }
+
+            // Generate HTML for cards
+            const cardsHTML = packages.map(pkg => `
+                <div class="bg-white border ${pkg.popular ? 'border-[#d4af37]' : 'border-gray-200'} rounded-xl flex flex-col hover:shadow-lg transition-shadow duration-300 relative overflow-hidden min-w-[280px] sm:min-w-0 snap-center fade-enter">
+                    
+                    ${pkg.popular ? `
+                    <div class="bg-gradient-to-r from-[#e6c27a] to-[#d4af37] text-gray-900 text-[10px] font-bold text-center py-1.5 uppercase tracking-widest">
+                        Popular
+                    </div>
+                    ` : ''}
+
+                    <div class="p-5 sm:p-6 flex flex-col h-full">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-1">${pkg.name}</h3>
+                        <div class="text-[22px] font-bold text-gray-900 mb-4 tracking-tight">₹${pkg.price} per sqft</div>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-6 sm:h-[80px]">
+                            ${pkg.description}
+                        </p>
+                        
+                        <h4 class="text-[11px] font-bold text-gray-400 tracking-[0.15em] mb-4 uppercase">Highlights</h4>
+                        
+                        <ul class="flex-grow space-y-3 mb-8">
+                            ${pkg.highlights.map(hl => `
+                                <li class="flex items-start text-sm text-gray-700 before:content-['•'] before:mr-2 before:text-gray-400">${hl}</li>
+                            `).join('')}
+                        </ul>
+
+                        <button class="w-full py-2.5 border border-gray-200 text-[#ea580c] text-sm font-medium rounded-lg hover:border-[#ea580c] hover:bg-orange-50 transition-all mb-6 mt-auto">
+                            Learn More
+                        </button>
+
+                        <div class="flex justify-between items-center border-t border-gray-100 pt-4 opacity-70">
+                            ${pkg.logos.map(logo => `<span class="text-[10px] sm:text-xs font-bold text-gray-800">${logo}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = cardsHTML;
+
+            // Add smooth fade-in animation trigger
+            requestAnimationFrame(() => {
+                const newCards = container.querySelectorAll('.fade-enter');
+                newCards.forEach(card => card.classList.add('fade-enter-active'));
+            });
+        }
+
+        // --- 3. Event Listeners ---
+
+        // A. Handle Modal Selection
+        modalRadios.forEach(radio => {
             radio.addEventListener('change', function () {
-                // When a city is selected, wait 0.4 seconds (so they see the active state), then close the modal
-                setTimeout(() => {
-                    modal.style.display = "none";
+                const chosenCity = this.id;
 
-                    // Optional: You can save their choice here or trigger another function
-                    console.log("User selected: " + this.id);
+                // 1. Save chosen city to local storage
+                localStorage.setItem('selectedCity', chosenCity);
+
+                // 2. Sync the background dropdown automatically
+                citySelector.value = chosenCity;
+
+                // 3. Re-render the UI with new city data
+                updateUI();
+
+                // 4. Close the modal after a short delay for visual feedback
+                setTimeout(() => {
+                    modal.classList.add("hidden");
+                    modal.classList.remove("flex");
                 }, 400);
             });
         });
+
+        // B. Handle Dropdown Selection (if they change city directly from packages page later)
+        citySelector.addEventListener('change', (e) => {
+            localStorage.setItem('selectedCity', e.target.value);
+            updateUI();
+        });
+
+        // C. Handle Package Type Toggle (Homes vs Luxury)
+        packageRadios.forEach(radio => {
+            radio.addEventListener('change', updateUI);
+        });
+
+        // --- 4. Initial Render ---
+        updateUI();
     });
 </script>
 <script>
