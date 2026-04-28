@@ -44,6 +44,162 @@
             scrollbar-width: none;
             /* Firefox */
         }
+
+        /* --- Base Styles (Desktop & Tablet) --- */
+        .modal-overlay {
+            display: none;
+            /* JS changes this to flex */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            width: 90%;
+            max-width: 500px;
+            /* Limits width on large screens */
+            border-radius: 12px;
+            /* Slightly softer corners */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            font-family: sans-serif;
+            overflow: hidden;
+            /* Keeps contents inside the rounded corners */
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .modal-title {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .close-btn {
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 30px 24px;
+        }
+
+        .location-radio {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows items to wrap to the next line on small screens */
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .radio {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            width: 80px;
+            /* Fixed width prevents shifting */
+        }
+
+        /* Image sizing managed by CSS now */
+        .radio img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+
+        /* Hover effect for desktop */
+        .radio:hover img {
+            transform: scale(1.05);
+        }
+
+        .radio input[type="radio"] {
+            display: none;
+            /* Hide the default radio circle */
+        }
+
+        .radio label {
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        /* Toggle SVG visibility */
+        .radio .selected-img {
+            display: none;
+        }
+
+        .radio input[type="radio"]:checked~label .selected-img {
+            display: inline-block;
+        }
+
+        .radio input[type="radio"]:checked~label .default-img {
+            display: none;
+        }
+
+        .location-name {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* --- Mobile Responsiveness --- */
+        @media (max-width: 480px) {
+            .modal-content {
+                width: 95%;
+                /* Takes up more width on small phones */
+            }
+
+            .modal-header {
+                padding: 16px 20px;
+            }
+
+            .modal-title {
+                font-size: 1.1rem;
+            }
+
+            .modal-body {
+                padding: 24px 16px;
+            }
+
+            .location-radio {
+                gap: 20px 15px;
+                /* Row gap 20px, Column gap 15px */
+                justify-content: space-evenly;
+            }
+
+            .radio {
+                width: 40%;
+                /* Forces a 2-by-2 grid layout on mobile */
+                max-width: 90px;
+            }
+
+            /* Shrink images slightly for mobile */
+            .radio img {
+                width: 48px;
+                height: 48px;
+            }
+
+            .location-name {
+                font-size: 13px;
+            }
+        }
     </style>
 </head>
 
@@ -60,8 +216,7 @@
                     <div
                         class="relative flex items-center justify-center rounded-xl w-18 h-12 bg-slate-800/50 border border-slate-600/50 shadow-sm backdrop-blur-md transition-all duration-300 group-hover:bg-slate-700/60 group-hover:border-slate-500/70 group-hover:shadow-[0_0_15px_rgba(234,88,12,0.2)] overflow-hidden">
 
-                        <img src="favicon.jpeg" alt="Brewflock Logo"
-                            class="w-full h-full object-cover" />
+                        <img src="favicon.jpeg" alt="Brewflock Logo" class="w-full h-full object-cover" />
                     </div>
 
                     <span
@@ -161,6 +316,101 @@
             </div>
         </div>
     </header>
+
+    <!-- City Selection Modal -->
+    <div id="cityModalOverlay" class="hidden fixed inset-0 z-[9999] bg-black/60 items-center justify-center">
+
+        <div
+            class="bg-white w-[95%] sm:w-[90%] max-w-[500px] rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.2)] font-sans overflow-hidden">
+
+            <div class="flex justify-between items-center p-4 sm:px-6 sm:py-5 border-b border-[#e5e5e5]">
+                <h5 class="m-0 text-[1.1rem] sm:text-xl font-semibold text-[#1a1a1a]" id="searchFilterLabel">
+                    Select your city
+                </h5>
+
+                <div id="closeModalBtn" class="cursor-pointer" style="display: none;">
+                    <img alt="close icon"
+                        src="https://d2d4xyu1zrrrws.cloudfront.net/website/web-ui/assets/images/calculators/stamp-duty-calculator/close.svg"
+                        loading="lazy">
+                </div>
+            </div>
+
+            <div class="px-4 py-6 sm:px-6 sm:py-[30px]">
+                <ul
+                    class="flex flex-wrap justify-evenly sm:justify-center gap-y-5 gap-x-[15px] sm:gap-[30px] list-none p-0 m-0">
+
+                    <li
+                        class="flex flex-col items-center text-center cursor-pointer w-[40%] max-w-[90px] sm:w-[80px] group">
+                        <input type="radio" name="location" id="bengaluru" class="hidden peer">
+                        <label for="bengaluru"
+                            class="cursor-pointer mb-2 peer-checked:[&_.default-img]:hidden peer-checked:[&_.selected-img]:block">
+                            <img loading="lazy"
+                                src="https://d2d4xyu1zrrrws.cloudfront.net/website/web-ui/assets/images/svg/bangalore.svg"
+                                class="default-img block w-[48px] h-[48px] sm:w-[55px] sm:h-[55px] object-contain transition-transform duration-200 ease-in-out group-hover:scale-105"
+                                alt="Bengaluru">
+                            <img loading="lazy"
+                                src="https://d2d4xyu1zrrrws.cloudfront.net/website/web-ui/assets/images/svg/bangalore-active.svg"
+                                class="selected-img hidden w-[48px] h-[48px] sm:w-[55px] sm:h-[55px] object-contain transition-transform duration-200 ease-in-out group-hover:scale-105"
+                                alt="Bengaluru Active">
+                        </label>
+                        <span class="text-[13px] sm:text-[14px] text-[#333] font-medium">Bengaluru</span>
+                    </li>
+
+                    <li
+                        class="flex flex-col items-center text-center cursor-pointer w-[40%] max-w-[90px] sm:w-[80px] group">
+                        <input type="radio" name="location" id="mysuru" class="hidden peer">
+                        <label for="mysuru"
+                            class="cursor-pointer mb-2 peer-checked:[&_.default-img]:hidden peer-checked:[&_.selected-img]:block">
+                            <img loading="lazy"
+                                src="https://d2d4xyu1zrrrws.cloudfront.net/website/web-ui/assets/images/svg/mysore.svg"
+                                class="default-img block w-[48px] h-[48px] sm:w-[55px] sm:h-[55px] object-contain transition-transform duration-200 ease-in-out group-hover:scale-105"
+                                alt="Mysuru">
+                            <img loading="lazy"
+                                src="https://d2d4xyu1zrrrws.cloudfront.net/website/web-ui/assets/images/svg/mysore-active.svg"
+                                class="selected-img hidden w-[48px] h-[48px] sm:w-[55px] sm:h-[55px] object-contain transition-transform duration-200 ease-in-out group-hover:scale-105"
+                                alt="Mysuru Active">
+                        </label>
+                        <span class="text-[13px] sm:text-[14px] text-[#333] font-medium">Mysuru</span>
+                    </li>
+
+                    <li
+                        class="flex flex-col items-center text-center cursor-pointer w-[40%] max-w-[90px] sm:w-[80px] group">
+                        <input type="radio" name="location" id="hassan" class="hidden peer">
+                        <label for="hassan"
+                            class="cursor-pointer mb-2 peer-checked:[&_.default-img]:hidden peer-checked:[&_.selected-img]:block">
+                            <img loading="lazy"
+                                src="https://d2d4xyu1zrrrws.cloudfront.net/website/web-ui/assets/images/noc-images/other_city.svg"
+                                class="default-img block w-[48px] h-[48px] sm:w-[55px] sm:h-[55px] object-contain transition-transform duration-200 ease-in-out group-hover:scale-105"
+                                alt="Hassan">
+                            <img loading="lazy"
+                                src="https://d2d4xyu1zrrrws.cloudfront.net/website/web-ui/assets/images/noc-images/other_city_active.svg"
+                                class="selected-img hidden w-[48px] h-[48px] sm:w-[55px] sm:h-[55px] object-contain transition-transform duration-200 ease-in-out group-hover:scale-105"
+                                alt="Hassan Active">
+                        </label>
+                        <span class="text-[13px] sm:text-[14px] text-[#333] font-medium">Hassan</span>
+                    </li>
+
+                    <li
+                        class="flex flex-col items-center text-center cursor-pointer w-[40%] max-w-[90px] sm:w-[80px] group">
+                        <input type="radio" name="location" id="pune" class="hidden peer">
+                        <label for="pune"
+                            class="cursor-pointer mb-2 peer-checked:[&_.default-img]:hidden peer-checked:[&_.selected-img]:block">
+                            <img loading="lazy"
+                                src="https://d2d4xyu1zrrrws.cloudfront.net/website/web-ui/assets/images/svg/pune.svg"
+                                class="default-img block w-[48px] h-[48px] sm:w-[55px] sm:h-[55px] object-contain transition-transform duration-200 ease-in-out group-hover:scale-105"
+                                alt="Pune">
+                            <img loading="lazy"
+                                src="https://d2d4xyu1zrrrws.cloudfront.net/website/web-ui/assets/images/svg/pune-active.svg"
+                                class="selected-img hidden w-[48px] h-[48px] sm:w-[55px] sm:h-[55px] object-contain transition-transform duration-200 ease-in-out group-hover:scale-105"
+                                alt="Pune Active">
+                        </label>
+                        <span class="text-[13px] sm:text-[14px] text-[#333] font-medium">Pune</span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section
@@ -3538,6 +3788,28 @@
     </footer>
 
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("cityModalOverlay");
+        const radioButtons = document.querySelectorAll('input[name="location"]');
+
+        // 1. Show the modal when the page loads
+        modal.style.display = "flex";
+
+        // 2. Add an event listener to each city option
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', function () {
+                // When a city is selected, wait 0.4 seconds (so they see the active state), then close the modal
+                setTimeout(() => {
+                    modal.style.display = "none";
+
+                    // Optional: You can save their choice here or trigger another function
+                    console.log("User selected: " + this.id);
+                }, 400);
+            });
+        });
+    });
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // ==========================================
