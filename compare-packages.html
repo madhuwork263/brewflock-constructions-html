@@ -425,8 +425,6 @@
                 const selectedCityKey = citySelector.value;
                 const selectedType = document.querySelector('input[name="package_type"]:checked').value;
 
-                // Fetch nested data from compareData.js
-                // Assuming compareData exists globally once the script loads
                 if (typeof compareData === 'undefined') return;
 
                 const cityData = compareData[selectedCityKey];
@@ -437,46 +435,51 @@
                     return;
                 }
 
-                // Update Header Title
                 pageTitle.textContent = `Compare Packages in ${cityData.name}`;
 
-                // --- Render Table Headers ---
-                // --- Render Table Headers ---
+                // --- 1. Render Table Headers ---
+                // FIX: Added solid background, z-30, and a right-shadow to hide scrolling text perfectly
                 let headHtml = `
-    <th class="bg-white w-[250px] min-w-[200px] px-4 py-5 sm:px-6 sm:py-5 border-b border-r border-gray-200 sticky left-0 z-30 align-middle text-sm font-bold text-gray-900 uppercase tracking-[0.1em]">
-        Features
-    </th>`;
+                <th class="bg-white w-[250px] min-w-[200px] px-4 py-5 sm:px-6 sm:py-5 border-b border-r border-gray-200 sticky left-0 z-30 shadow-[4px_0_10px_-2px_rgba(0,0,0,0.1)] align-middle text-sm font-bold text-gray-900 uppercase tracking-[0.1em]">
+                    Features
+                </th>`;
 
                 tableData.packages.forEach(pkg => {
                     headHtml += `
-        <th class="min-w-[180px] w-1/4 px-4 py-5 sm:px-6 sm:py-5 border-b border-r border-gray-200 text-center bg-white align-middle transition-all">
-            <h3 class="text-xl font-bold text-gray-900">${pkg.name}</h3>
-            <p class="text-[#ea580c] font-semibold mt-1">₹${pkg.price} <span class="text-xs text-gray-500 font-normal">per sqft</span></p>
-        </th>
-    `;
+                    <th class="min-w-[180px] w-1/4 px-4 py-5 sm:px-6 sm:py-5 border-b border-r border-gray-200 text-center bg-white align-middle transition-all">
+                        <h3 class="text-xl font-bold text-gray-900">${pkg.name}</h3>
+                        <p class="text-[#ea580c] font-semibold mt-1">₹${pkg.price} <span class="text-xs text-gray-500 font-normal">per sqft</span></p>
+                    </th>`;
                 });
                 thead.innerHTML = headHtml;
 
-                // --- Render Table Body ---
+                // --- 2. Render Table Body ---
                 let bodyHtml = '';
                 tableData.sections.forEach(section => {
+                    
                     // Category Banner
+                    // FIX: Made this fully opaque with a solid bg-gray-100
                     bodyHtml += `
-                        <tr class="bg-gray-50 border-b border-gray-200">
-                            <td colspan="${tableData.packages.length + 1}" class="px-6 py-4 sticky left-0 z-10 bg-gray-50 border-r border-gray-200">
-                                <div class="flex items-baseline gap-2">
+                        <tr class="bg-gray-100 border-b border-gray-200">
+                            <td class="p-4 sm:px-6 sm:py-4 sticky left-0 z-20 bg-gray-100 border-r border-gray-200 shadow-[4px_0_10px_-2px_rgba(0,0,0,0.1)]">
+                                <div class="flex flex-col gap-1">
                                     <h4 class="text-[13px] font-bold tracking-[0.1em] text-gray-900 uppercase">${section.title}</h4>
-                                    ${section.note ? `<span class="text-[10px] text-gray-500 italic lowercase tracking-normal font-normal hidden sm:inline-block">${section.note}</span>` : ''}
+                                    ${section.note ? `<span class="text-[10px] text-gray-500 italic tracking-normal font-normal leading-tight">${section.note}</span>` : ''}
                                 </div>
                             </td>
+                            <td colspan="${tableData.packages.length}" class="bg-gray-100 pointer-events-none"></td>
                         </tr>
                     `;
 
                     // Feature Rows
                     section.rows.forEach((row, index) => {
-                        const rowBg = index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50';
-                        bodyHtml += `<tr class="${rowBg} hover:bg-orange-50/30 transition-colors border-b border-gray-100 group">
-                            <td class="p-4 sm:px-6 sm:py-5 sticky left-0 z-10 ${rowBg} group-hover:bg-orange-50/30 border-r border-gray-200 font-medium text-gray-800 sticky-col-shadow align-middle pointer-events-none">
+                        // FIX: Removed alpha transparency (/50) to make backgrounds solid
+                        const rowBg = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
+                        
+                        // FIX: Updated hover state to be fully solid (hover:bg-orange-50)
+                        // FIX: Added shadow-[4px_0_10px_-2px_rgba(0,0,0,0.1)] to hide text behind a clean shadow line
+                        bodyHtml += `<tr class="${rowBg} hover:bg-orange-50 transition-colors border-b border-gray-100 group">
+                            <td class="p-4 sm:px-6 sm:py-5 sticky left-0 z-20 ${rowBg} group-hover:bg-orange-50 border-r border-gray-200 font-medium text-gray-800 align-middle shadow-[4px_0_10px_-2px_rgba(0,0,0,0.1)]">
                                 ${row.feature}
                             </td>`;
 
@@ -491,7 +494,6 @@
                 });
                 tbody.innerHTML = bodyHtml;
             }
-
             // --- Event Listeners ---
 
             // When City changes, save to local storage and update
