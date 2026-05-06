@@ -18,7 +18,7 @@
 <body class="bg-gray-50 min-h-screen">
 
     <header id="main-header"
-        class="fixed top-0 left-0 right-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-700/50 shadow-lg py-3">
+        class="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 shadow-lg py-3">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="flex justify-between items-center">
 
@@ -32,10 +32,10 @@
                     </div>
 
                     <span
-                        class="text-base md:text-lg font-extrabold tracking-[0.15em] text-white uppercase transition-all duration-300 group-hover:text-slate-100">
+                        class="text-sm sm:text-base md:text-lg font-extrabold tracking-[0.15em] text-white uppercase transition-all duration-300 group-hover:text-slate-100">
                         Brewflock
                         <span
-                            class="text-[#ea580c] hidden sm:inline transition-colors duration-300 group-hover:text-[#f97316]">
+                            class="text-[#ea580c] sm:inline transition-colors duration-300 group-hover:text-[#f97316]">
                             Constructions
                         </span>
                     </span>
@@ -107,15 +107,15 @@
         <div id="mobile-menu"
             class="md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 shadow-2xl transition-all duration-300 ease-in-out origin-top opacity-0 scale-y-0 pointer-events-none">
             <div class="px-6 py-6 flex flex-col space-y-4">
-                <a href="#about"
+                <a href="index.html#about"
                     class="mobile-link text-lg font-semibold text-slate-300 hover:text-[#ea580c] transition-colors py-2 border-b border-slate-800/50">About</a>
-                <a href="#services"
+                <a href="index.html#services"
                     class="mobile-link text-lg font-semibold text-slate-300 hover:text-[#ea580c] transition-colors py-2 border-b border-slate-800/50">Services</a>
-                <a href="#projects"
+                <a href="index.html#projects"
                     class="mobile-link text-lg font-semibold text-slate-300 hover:text-[#ea580c] transition-colors py-2 border-b border-slate-800/50">Projects</a>
-                <a href="#contact"
+                <a href="index.html#contact"
                     class="mobile-link text-lg font-semibold text-slate-300 hover:text-[#ea580c] transition-colors py-2 border-b border-slate-800/50">Contact</a>
-                <a href="#contact"
+                <a href="index.html#contact"
                     class="mobile-link flex items-center justify-center gap-2 w-full mt-4 px-5 py-4 rounded-xl bg-[#ea580c] text-white font-bold hover:bg-[#c2410c] transition-colors">
                     Get a Quote
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -398,6 +398,39 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
+            const menuBtn = document.getElementById('menu-toggle-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const iconMenu = document.getElementById('icon-menu');
+            const iconX = document.getElementById('icon-x');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            let isMenuOpen = false;
+
+            if (menuBtn && mobileMenu) {
+                const toggleMenu = () => {
+                    isMenuOpen = !isMenuOpen;
+                    if (isMenuOpen) {
+                        mobileMenu.classList.remove('opacity-0', 'scale-y-0', 'pointer-events-none');
+                        mobileMenu.classList.add('opacity-100', 'scale-y-100');
+                        iconMenu.classList.add('hidden');
+                        iconX.classList.remove('hidden');
+                    } else {
+                        mobileMenu.classList.add('opacity-0', 'scale-y-0', 'pointer-events-none');
+                        mobileMenu.classList.remove('opacity-100', 'scale-y-100');
+                        iconMenu.classList.remove('hidden');
+                        iconX.classList.add('hidden');
+                    }
+                };
+
+                menuBtn.addEventListener('click', toggleMenu);
+
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (isMenuOpen) toggleMenu();
+                    });
+                });
+            }
+
             // Elements
             const header = document.getElementById('main-header');
             const thead = document.getElementById('table-head-row');
@@ -456,7 +489,7 @@
                 // --- 2. Render Table Body ---
                 let bodyHtml = '';
                 tableData.sections.forEach(section => {
-                    
+
                     // Category Banner
                     // FIX: Made this fully opaque with a solid bg-gray-100
                     bodyHtml += `
@@ -475,7 +508,7 @@
                     section.rows.forEach((row, index) => {
                         // FIX: Removed alpha transparency (/50) to make backgrounds solid
                         const rowBg = index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
-                        
+
                         // FIX: Updated hover state to be fully solid (hover:bg-orange-50)
                         // FIX: Added shadow-[4px_0_10px_-2px_rgba(0,0,0,0.1)] to hide text behind a clean shadow line
                         bodyHtml += `<tr class="${rowBg} hover:bg-orange-50 transition-colors border-b border-gray-100 group">
