@@ -3783,6 +3783,7 @@
     </section>
 
     <!-- Contact Section -->
+    <!-- Contact Section -->
     <section id="contact" class="py-16 relative bg-[#0B1120] text-white overflow-hidden">
 
         <div
@@ -3796,6 +3797,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
 
+                <!-- Left Column: Contact Info -->
                 <div class="lg:col-span-5 flex flex-col space-y-8">
                     <div>
                         <div
@@ -3900,6 +3902,7 @@
                     </div>
                 </div>
 
+                <!-- Right Column: Form Area -->
                 <div class="lg:col-span-7 relative">
 
                     <div
@@ -3907,14 +3910,16 @@
                     </div>
 
                     <div
-                        class="bg-slate-900/80 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-slate-700/60 shadow-2xl relative overflow-hidden">
+                        class="bg-slate-900/80 backdrop-blur-xl p-6 md:p-8 rounded-2xl border border-slate-700/60 shadow-2xl relative overflow-hidden min-h-[400px] flex flex-col justify-center">
 
                         <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-bl-full blur-xl"></div>
 
-                        <h3 class="text-xl font-bold mb-6 text-white">Project Inquiry Form</h3>
+                        <h3 id="formTitle"
+                            class="text-xl font-bold mb-6 text-white relative z-10 transition-opacity duration-300">
+                            Project Inquiry Form</h3>
 
-                        <form class="space-y-4 relative z-10" onsubmit="event.preventDefault();">
-
+                        <!-- Actual Form -->
+                        <form id="projectInquiryForm" class="space-y-4 relative z-10 transition-all duration-300">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="space-y-1.5">
                                     <label for="firstName"
@@ -3939,7 +3944,7 @@
                                     <label for="email"
                                         class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Email
                                         Address</label>
-                                    <input type="email" id="email"
+                                    <input type="email" id="email" required
                                         class="w-full px-4 py-3 text-sm bg-slate-950/50 border border-slate-700/50 rounded-lg text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-[#ea580c] focus:border-[#ea580c] focus:bg-slate-900 transition-all"
                                         placeholder="john@company.com" />
                                 </div>
@@ -3988,8 +3993,34 @@
                                     <path d="M22 2 11 13" />
                                 </svg>
                             </button>
-
                         </form>
+
+                        <!-- Success Message (Hidden Initially) -->
+                        <div id="successMessage"
+                            class="hidden absolute inset-0 z-20 flex-col items-center justify-center p-8 text-center bg-slate-900/95 backdrop-blur-sm transition-opacity duration-500">
+                            <div
+                                class="w-16 h-16 bg-green-500/10 text-green-500 rounded-full flex items-center justify-center border border-green-500/20 mb-6 shadow-[0_0_30px_rgba(34,197,94,0.2)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-3">Response Recorded</h3>
+                            <p class="text-slate-400 text-sm max-w-[280px] mx-auto leading-relaxed">
+                                Thank you for your inquiry. We have recorded your request and our team will get back to
+                                you shortly.
+                            </p>
+                            <button id="resetFormBtn"
+                                class="mt-8 text-[#ea580c] hover:text-[#c2410c] text-sm font-semibold transition-colors flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="m3 12 7-7v4h11v6H10v4Z" />
+                                </svg>
+                                Send another inquiry
+                            </button>
+                        </div>
+
                     </div>
                 </div>
 
@@ -4206,6 +4237,62 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+
+        /**
+         * Contact Form Submission Handling
+         */
+
+        const form = document.getElementById('projectInquiryForm');
+        const successMessage = document.getElementById('successMessage');
+        const resetBtn = document.getElementById('resetFormBtn');
+        const formTitle = document.getElementById('formTitle');
+
+        if (form && successMessage) {
+            form.addEventListener('submit', (e) => {
+                // Prevent page reload and data submission
+                e.preventDefault();
+
+                // Hide form and title visually
+                form.style.opacity = '0';
+                formTitle.style.opacity = '0';
+
+                setTimeout(() => {
+                    form.classList.add('hidden');
+
+                    // Show success message
+                    successMessage.classList.remove('hidden');
+                    successMessage.classList.add('flex');
+
+                    // Optional: trigger a reflow for smooth fade in if desired
+                    setTimeout(() => {
+                        successMessage.style.opacity = '1';
+                    }, 50);
+                }, 300); // Matches transition duration
+            });
+        }
+
+        if (resetBtn && form && successMessage) {
+            resetBtn.addEventListener('click', () => {
+                // Reset the form fields
+                form.reset();
+
+                // Hide success message
+                successMessage.classList.add('hidden');
+                successMessage.classList.remove('flex');
+
+                // Show form and title
+                form.classList.remove('hidden');
+
+                setTimeout(() => {
+                    form.style.opacity = '1';
+                    formTitle.style.opacity = '1';
+                }, 50);
+            });
+        }
+
+        /*
+        *** Accordion Functionality for Detailed Architecture 
+        */
 
         const accordionButtons = document.querySelectorAll('.accordion-button');
 
